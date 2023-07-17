@@ -1,0 +1,35 @@
+import webbrowser
+import os
+import time
+import pyperclip as pc
+import pyautogui as pg
+from datetime import datetime
+
+# Open up the specific web browser
+url = 'https://www.google.com'
+webbrowser.register('chrome',
+                    None,
+                    webbrowser.BackgroundBrowser('C:\Program Files\Google\Chrome\Application\chrome.exe'))
+webbrowser.get('chrome').open(url)
+# Delay execution for 2 sec
+time.sleep(1)
+
+# Specify keyword to browse
+keyword = 'AAPL today'
+
+# Copy&Paste, then google
+pc.copy(keyword)
+time.sleep(1)
+pg.hotkey('ctrl','v')
+time.sleep(1)
+pg.press('enter')
+time.sleep(1)
+pg.scroll(-50)
+
+# Take a screenshot
+filename = datetime.now().strftime('%m%d%Y')+'.png'
+screenshot = pg.screenshot()
+
+# Save in the folder
+folderpath = 'C:\\Users\\BP\\Downloads\\AAPL'
+screenshot.save(os.path.join(folderpath,filename))
